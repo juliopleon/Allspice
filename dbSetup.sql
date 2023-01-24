@@ -42,4 +42,44 @@ CREATE TABLE
 
 INSERT INTO
     `favorites` (`recipeId`, `accountId`)
-VALUES (1, '')
+VALUES (1, '63c86f7e1eaff3f6f4406ad9');
+
+INSERT INTO
+    recipes (
+        title,
+        intstructions,
+        `coverImg`,
+        category,
+        `creatorId`
+    )
+VALUES (
+        'Chicken Tenders',
+        'throw in tenders with hot sauce and boom',
+        'https://www.healthyseasonalrecipes.com/wp-content/uploads/2016/01/healthy-baked-chicken-tenders-sq-22-5-640x480.jpg',
+        'Healthy',
+        '63c86f7e1eaff3f6f4406ad9'
+    );
+
+INSERT INTO
+    recipes (
+        title,
+        intstructions,
+        `coverImg`,
+        category,
+        `creatorId`
+    )
+VALUES (
+        'Burgers',
+        'cook it well and juicy',
+        'https://www.healthyseasonalrecipes.com/wp-content/uploads/2016/01/healthy-baked-chicken-tenders-sq-22-5-640x480.jpg',
+        'not healthy',
+        '63c86f7e1eaff3f6f4406ad9',
+        archived
+    )
+SELECT re.*, ac.*
+FROM recipes re
+    JOIN accounts ac ON ac.id = re.`creatorId`;
+
+SELECT ac.*, fa.id
+FROM favorites fa
+    JOIN accounts ac ON fa.`accountId` = ac.id;
