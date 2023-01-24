@@ -18,6 +18,17 @@ public class RecipesService
         return filtered;
     }
 
+    internal Recipe Get(int id)
+    {
+        Recipe recipe = _repo.Get(id);
+        if (recipe == null)
+        {
+            throw new Exception("no recipe by that id");
+
+        }
+        return recipe;
+    }
+
     internal Recipe GetOne(int id, string userId)
     {
         Recipe recipe = _repo.GetOne(id);
@@ -30,5 +41,39 @@ public class RecipesService
             throw new Exception("not your recipe.");
         }
         return recipe;
+    }
+
+    internal Recipe Create(Recipe recipeData)
+    {
+        Recipe recipe = _repo.Create(recipeData);
+        return recipe;
+    }
+
+    internal Recipe Update(Recipe recipeUpdate, int id)
+    {
+        Recipe original = Get(id);
+        original.Title = recipeUpdate.Title ?? original.Title;
+        original.Instructions = recipeUpdate.Instructions ?? original.Instructions;
+        original.Img = recipeUpdate.Img ?? original.Img;
+        original.Category = recipeUpdate.Category ?? original.Category;
+
+        bool edited = _repo.Update(original);
+        if (edited == false)
+        {
+            throw new Exception("Recipe was not updated");
+        }
+        return original;
+    }
+
+    internal string Remove(int id, string userId)
+    {
+        Recipe original = GetOne(id, userId);
+        if (original.CreatorId != userId)
+        {
+            throw new Exception("Not your Recipe");
+        }
+
+        _repo.Remove(id);
+        return $"{original.Title} has been removed";
     }
 }

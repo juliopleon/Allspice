@@ -12,8 +12,8 @@ CREATE TABLE
     IF NOT EXISTS recipes(
         id INT NOT NUll AUTO_INCREMENT PRIMARY KEY,
         title VARCHAR(255) NOT NUll,
-        intstructions TEXT,
-        coverImg VARCHAR(255) NOT NULL DEFAULT 'https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000',
+        instructions TEXT,
+        img VARCHAR(255) NOT NULL DEFAULT 'https://img.freepik.com/free-photo/chicken-wings-barbecue-sweetly-sour-sauce-picnic-summer-menu-tasty-food-top-view-flat-lay_2829-6471.jpg?w=2000',
         category VARCHAR(255) NOT NULL DEFAULT 'misc',
         archived BOOLEAN NOT NULL DEFAULT false,
         creatorId VARCHAR(255) NOT NULL,
@@ -47,8 +47,8 @@ VALUES (1, '63c86f7e1eaff3f6f4406ad9');
 INSERT INTO
     recipes (
         title,
-        intstructions,
-        `coverImg`,
+        instructions,
+        img,
         category,
         `creatorId`
     )
@@ -63,8 +63,8 @@ VALUES (
 INSERT INTO
     recipes (
         title,
-        intstructions,
-        `coverImg`,
+        instructions,
+        img,
         category,
         `creatorId`
     )
