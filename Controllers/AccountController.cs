@@ -32,12 +32,12 @@ public class AccountController : ControllerBase
 
     [HttpGet("favorites")]
     [Authorize]
-    public async Task<ActionResult<List<Favorite>>> GetRecipes()
+    public async Task<ActionResult<List<MyRecipe>>> GetRecipes()
     {
         try
         {
             Account userInfo = await _auth0Provider.GetUserInfoAsync<Account>(HttpContext);
-            List<Favorite> favorites = _favoritesService.GetMyFavorites(userInfo.Id);
+            List<MyRecipe> favorites = _favoritesService.GetFavorites(userInfo.Id);
             return favorites;
         }
         catch (Exception e)

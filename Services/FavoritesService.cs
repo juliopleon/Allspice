@@ -18,9 +18,20 @@ public class FavoritesService
         return favorite;
     }
 
-    internal List<Favorite> GetFavorites(string accountId)
+    internal List<MyRecipe> GetFavorites(string accountId)
     {
-        List<Favorite> favorites = _repo.GetFavorites(accountId);
+        List<MyRecipe> favorites = _repo.GetFavorites(accountId);
         return favorites;
+    }
+
+    internal string Remove(int id, string userId)
+    {
+        Favorite favorite = _repo.GetOne(id);
+        if (favorite == null)
+        {
+            throw new Exception("favorite has been already removed");
+        }
+        _repo.Remove(id);
+        return $"Favorite at {id} was removed";
     }
 }
