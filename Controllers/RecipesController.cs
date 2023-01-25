@@ -84,6 +84,21 @@ public class RecipesController : ControllerBase
         }
     }
 
+    [HttpGet("{id}/ingredients")]
+    public ActionResult<List<Ingredient>> GetIngredients(int id)
+    {
+        try
+        {
+            // Account userInfo = await _auth0provider.GetUserInfoAsync<Account>(HttpContext);
+            List<Ingredient> ingredients = _ingredientsService.GetIngredientsByRecipe(id);
+            return Ok(ingredients);
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
+    }
+
     [HttpDelete("{id}")]
     [Authorize]
     public async Task<ActionResult<string>> Remove(int id)

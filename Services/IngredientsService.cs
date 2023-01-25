@@ -16,4 +16,24 @@ public class IngredientsService
         Ingredient ingredient = _repo.Create(ingredientData);
         return ingredient;
     }
+
+    internal List<Ingredient> GetIngredientsByRecipe(int recipeId)
+    {
+        // Recipe recipe = _recipesService.GetOne(recipeId);
+
+        List<Ingredient> ingredients = _repo.GetIngredientsByRecipe(recipeId);
+        return ingredients;
+    }
+
+    internal string Remove(int id, string userId)
+    {
+        Ingredient original = _repo.GetOne(id);
+        if (original.CreatorId != userId)
+        {
+            throw new Exception("not your ingredient to delete");
+        }
+        _repo.remove(id);
+        return $"Ingredient at {id} was removed";
+    }
+
 }
